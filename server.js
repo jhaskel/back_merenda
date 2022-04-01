@@ -30,8 +30,8 @@ rutas
 
 const users = require('./rotas/usersRoutes');
 const role = require('./rotas/roleRoutes');
-
 const cidade = require('./rotas/cidadeRoutes');
+const setor = require('./rotas/setorRoutes');
 
 
 
@@ -58,6 +58,7 @@ app.disable('x-powered-by');
 users(app,upload,midle);
 role(app);
 cidade(app,midle);
+setor(app,midle);
 
 
 process.env.TZ = "America/Sao_Paulo";

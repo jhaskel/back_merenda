@@ -11,6 +11,10 @@ class Cidade extends Model {
     })
   }
 
+  static associate(models) {
+    this.hasMany(models.Address, { foreignKey: 'cidade_id', as: 'setores' });   
+  }
+
 }
 
 module.exports = Cidade;

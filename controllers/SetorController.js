@@ -1,17 +1,17 @@
-const Cidade = require('../models/Cidade');
+const Setor = require('../models/Setor');
 module.exports = {     
   
   async index(req, res) {   
     console.log("aqui2")
     
     try {
-      const clientes = await Cidade.findAll();        
-      return res.status(201).json(clientes);
+      const setores = await Setor.findAll();        
+      return res.status(201).json(setores);
   } 
   catch (error) {
       console.log(`Error ${error}`);    
       return res.status(501).json({
-          message: 'Houve um erro em obter os Usuarios',
+          message: 'Houve um erro em obter os Setores',
           error: error,
           success: false
       })
@@ -21,18 +21,18 @@ module.exports = {
   async findById(req, res) {
     var id = req.params.id;
     try {
-      const clientes = await Cidade.findByPk(id)     
-      if (!clientes) {
+      const setores = await Setor.findByPk(id)     
+      if (!setores) {
         return res.status(404).json({ 
-          message: 'Cidade not found',success:false
+          message: 'Setor not found',success:false
          });
       }
-      return res.status(201).json(clientes);
+      return res.status(201).json(setores);
   } 
   catch (error) {
       console.log(`Error ${error}`);    
       return res.status(501).json({
-          message: 'Houve um erro em obter os Usuarios',
+          message: 'Houve um erro em obter os Setores',
           error: error,
           success: false
       })
@@ -41,14 +41,10 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, logo } = req.body; 
-   
-    try {      
-      const city = await Cidade.findOne({ where : {name : name }});
-      if(city){
-        res.status(400).json({ error : "Cidade já registrada",success:false });
-      }
-        const cliente = await Cidade.create({ name, logo });     
+    const { name, cidade_id } = req.body;    
+    try {     
+     
+        const cliente = await Setor.create({ name, cidade_id });     
         return res.status(200).json({
           success: true,     
           data: cliente,
@@ -59,7 +55,7 @@ module.exports = {
       console.log(`Error: ${error}`);
       return res.status(501).json({
           success: false,
-          message: 'Erro ao adicionar a cidade',
+          message: 'Erro ao adicionar o Setor',
           error: error
       });
       
@@ -67,27 +63,27 @@ module.exports = {
     
   },
   async update(req, res, next) {
-    const  {id,name,logo } = req.body;
+    const  {id,name,icone } = req.body;
     
     try {
-      const cidade = await Cidade.findByPk(id);
-      if(!cidade){
-          res.status(400).json({ error : "Cidade não encontrada",success:false });
+      const Setor = await Setor.findByPk(id);
+      if(!Setor){
+          res.status(400).json({ error : "Setor não encontrado",success:false });
         
         } 
-      await Cidade.update({ 
+      await Setor.update({ 
         name: name,
-        logo:logo }, {
+        icone:icone }, {
         where: {
           id: id
         }
       });
-     // const cidadeAtualizada = await Cidade.findByPk(id);
+     // const SetorAtualizada = await Setor.findByPk(id);
 
       return res.status(200).json({
         success: true,     
-        data: cidade,
-        message: 'Cidade atualizada com sucesso'
+        data: Setor,
+        message: 'Setor atualizado com sucesso'
     });
 
 
@@ -96,7 +92,7 @@ module.exports = {
       console.log(`Error: ${error}`);
       return res.status(501).json({
           success: false,
-          message: 'Erro ao atualizar a cidade',
+          message: 'Erro ao atualizar o Setor',
           error: error
       });
       
@@ -110,27 +106,27 @@ module.exports = {
     const id = req.params.id;
    
     try {   
-      const cidade = await Cidade.findByPk(id);
-      if(!cidade){
-          res.status(400).json({ error : "Cidade não encontrado" });
+      const Setor = await Setor.findByPk(id);
+      if(!Setor){
+          res.status(400).json({ error : "Setor não encontrado" });
         
         } 
-        await Cidade.destroy({
+        await Setor.destroy({
           where: {
             id: id
           }
         });    
         return res.status(201).json({
             success: true,
-            data:cidade,
-            message: 'Cidade excluída com sucesso'
+            data:Setor,
+            message: 'Setor excluído com sucesso'
         });
     } 
     catch(e) {
         console.log(`Error: ${error}`);
         return res.status(501).json({
             success: false,
-            message: 'Erro ao Excluir a cidade',
+            message: 'Erro ao Excluir o Setor',
             error: error
         });
     }
