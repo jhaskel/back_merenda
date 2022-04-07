@@ -1,6 +1,6 @@
 
 
-const ProdutoController = require('../controllers/ProdutoController');
+const ProdutoController = require('../controllers/produtoController');
 
 
 
