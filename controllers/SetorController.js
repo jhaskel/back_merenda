@@ -5,7 +5,12 @@ module.exports = {
     console.log("aqui2")
     
     try {
-      const setores = await Setor.findAll({include: { association: 'setor_cidades',  attributes: ['name'],  },});        
+      const setores = await Setor.findAll({
+        include: [{ 
+          association: 'setor_cidades', 
+           attributes: ['name','id'],           
+        }]
+          });        
       return res.status(201).json(setores);
   } 
   catch (error) {
@@ -39,6 +44,37 @@ module.exports = {
   } 
    
   },
+
+  async findByCidade(req, res) {
+    var cidade = req.params.cidade;
+    try {
+      
+      const niveiss = await Setor.findAll({ 
+        where : {cidade_id : cidade },
+        include: [{ 
+          association: 'setor_cidades', 
+           attributes: ['name'],           
+        }]
+      
+      }); 
+      if (!niveiss) {
+        return res.status(404).json({ 
+          message: 'Setor not found',success:false
+         });
+      }
+      return res.status(201).json(niveiss);
+  } 
+  catch (error) {
+      console.log(`Error ${error}`);    
+      return res.status(501).json({
+          message: 'Houve um erro em obter os setores',
+          error: error,
+          success: false
+      })
+  } 
+   
+  },
+
 
   async create(req, res) {
     const { name, cidade_id } = req.body;    
