@@ -83,12 +83,13 @@ async findById(req, res) {
           }else{
             const salt = await bcrypt.genSalt(10);   
             var usr = {
+              cidade_id: req.body.cidade_id,
+              setor_id: req.body.setor_id,
               name : req.body.name,
-              email : req.body.email,
-              login : req.body.login,
+              email : req.body.email,             
+              modulo : req.body.modulo,
               password : await bcrypt.hash(req.body.password, salt),
-              isativo : req.body.isativo,
-              setor : req.body.setor
+              isativo : req.body.isativo,              
             };
             created_user = await User.create(usr);
             const user_id = created_user.id;
@@ -101,7 +102,7 @@ async findById(req, res) {
                 id: created_user.id,
                 name: created_user.name,
                 email:created_user.email,
-                login:created_user.login,                
+                             
             }
             return res.status(200).json({
               success: true,              

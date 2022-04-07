@@ -1,21 +1,42 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('categorias', { 
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },  
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },    
+      icone: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }, 
+      is_alimento: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      }, 
+      isativo: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },  
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('categorias');
   }
 };

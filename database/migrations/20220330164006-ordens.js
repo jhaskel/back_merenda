@@ -9,54 +9,57 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      setor_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'setores', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      licitacao_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'licitacao', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      fornecedor_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'fornecedores', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      nivel_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'niveis', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      despesa_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'contabilidade', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      status_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'status', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      
       code: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      setor: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      licitacao: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      fornecedor: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      nivel: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      status: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      despesa: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      coddespesa: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      codedespesa: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      isdespesa: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },       
-      isenviado: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },   
+      },     
       isativo: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-      },       
+      }, 
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -69,6 +72,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('ordens');
   }
 };

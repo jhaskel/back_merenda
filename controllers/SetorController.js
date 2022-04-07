@@ -71,9 +71,10 @@ module.exports = {
           res.status(400).json({ error : "Setor não encontrado",success:false });
         
         } 
+        
       await Setor.update({ 
-        name: name,
-        icone:icone }, {
+        name,icone
+      }, {
         where: {
           id: id
         }

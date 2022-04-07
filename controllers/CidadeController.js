@@ -41,14 +41,14 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, logo } = req.body; 
+    const { name, logo,isativo } = req.body; 
    
     try {      
       const city = await Cidade.findOne({ where : {name : name }});
       if(city){
         res.status(400).json({ error : "Cidade já registrada",success:false });
       }
-        const cliente = await Cidade.create({ name, logo });     
+        const cliente = await Cidade.create({ name, logo,isativo });     
         return res.status(200).json({
           success: true,     
           data: cliente,
@@ -67,30 +67,27 @@ module.exports = {
     
   },
   async update(req, res, next) {
-    const  {id,name,logo } = req.body;
+    const  {id,name,logo,isativo } = req.body;
     
     try {
-      const cidade = await Cidade.findByPk(id);
-      if(!cidade){
+      const cate = await Cidade.findByPk(id);
+      if(!cate){
           res.status(400).json({ error : "Cidade não encontrada",success:false });
         
-        } 
+        }            
       await Cidade.update({ 
-        name: name,
-        logo:logo }, {
+        name,logo,isativo }, {
         where: {
           id: id
         }
       });
-     // const cidadeAtualizada = await Cidade.findByPk(id);
+      const atualizada = await Cidade.findOne({ where : {id : id }});
 
       return res.status(200).json({
         success: true,     
-        data: cidade,
+        data: atualizada,
         message: 'Cidade atualizada com sucesso'
     });
-
-
       
     } catch (error) {
       console.log(`Error: ${error}`);

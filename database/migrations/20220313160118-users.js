@@ -9,6 +9,14 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      cidade_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      setor_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },   
       name: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -17,28 +25,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
-      login: {
-        type: Sequelize.STRING,
+      modulo: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-      }, 
-      setor: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },   
-      idmodulo: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
       },    
       password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      token: {
+      session_token: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       notification_token: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      recovery: {
         type: Sequelize.STRING,
         allowNull: true,
       },

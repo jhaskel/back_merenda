@@ -1,21 +1,54 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('cart', { 
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      escola_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'escolas', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      estoque_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'estoques', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      quantidade: {
+        type: Sequelize.DOUBLE(10,2),
+        allowNull: false,
+      },
+      valor: {
+        type: Sequelize.DOUBLE(10,2),
+        allowNull: false,
+      }, 
+      total: {
+        type: Sequelize.DOUBLE(10,2),
+        allowNull: false,
+      },               
+     
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    });
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('cart');
   }
 };
+
