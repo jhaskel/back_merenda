@@ -5,7 +5,7 @@ module.exports = {
     console.log("aqui2")
     
     try {
-      const setores = await Setor.findAll();        
+      const setores = await Setor.findAll({include: { association: 'setor_cidades',  attributes: ['name'],  },});        
       return res.status(201).json(setores);
   } 
   catch (error) {

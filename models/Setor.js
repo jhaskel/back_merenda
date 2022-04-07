@@ -3,8 +3,8 @@ const { Model, DataTypes } = require('sequelize');
 class Setor extends Model {
   static init(sequelize) {
     super.init({
-        
-        name: DataTypes.STRING,    
+      cidade_id:DataTypes.INTEGER,
+      name: DataTypes.STRING,    
 
     }, {
       sequelize,
@@ -12,7 +12,7 @@ class Setor extends Model {
     })
   }
   static associate(models) {  
-    this.belongsTo(models.Cidade, { foreignKey: 'cidade_id', as: 'cidade' });
+    this.belongsTo(models.Cidade, { foreignKey: 'cidade_id', as: 'setor_cidades' });
     this.hasMany(models.Config, { foreignKey: 'setor_id', as: 'setor_config' }); 
     this.hasMany(models.Nivel, { foreignKey: 'setor_id', as: 'setor_nivel' }); 
     this.hasMany(models.Escola, { foreignKey: 'setor_id', as: 'setor_escola' });
