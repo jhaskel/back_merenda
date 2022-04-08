@@ -99,17 +99,16 @@ module.exports = {
     
   },
   async update(req, res, next) {
-    const  {id,name,icone } = req.body;
+    const  {id,name } = req.body;
     
     try {
-      const Setor = await Setor.findByPk(id);
-      if(!Setor){
-          res.status(400).json({ error : "Setor não encontrado",success:false });
-        
+      const setoor = await Setor.findByPk(id);
+      if(!setoor){
+          res.status(400).json({ error : "Setor não encontrado",success:false });        
         } 
         
       await Setor.update({ 
-        name,icone
+        name,
       }, {
         where: {
           id: id

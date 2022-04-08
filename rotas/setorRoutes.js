@@ -14,7 +14,7 @@ module.exports = (app, middlewareValidarJWT) => {
     app.get('/setor/:id', SetorController.findById);
     app.post('/api/v1/setor/create',middlewareValidarJWT, SetorController.create);
     app.delete('/api/v2/setor/excluir/:id', SetorController.delete);
-    app.put('/api/v2/setor/update', SetorController.update);
+    app.put('/api/v1/setor/update',middlewareValidarJWT, SetorController.update);
 
 
 }
